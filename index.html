@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Muhammad Jawad MR | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /*
+        Color Palette: Classic Black, Cream, and Dark Brown
+        Body Background: #FAF9F6 (Cream) with subtle animation
+        General Text: #4B371C (Dark Brown)
+        Navbar/Footer Background: #000000 (Black)
+        Accent: #B8860B (Muted Gold/Bronze)
+        */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Keyframes for subtle background animation */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            /* Animated gradient for a subtle "skin-colored" feel */
+            background: linear-gradient(135deg, #FAF9F6, #F0EDE5, #FAF9F6);
+            background-size: 200% 200%; /* Important for the animation to have space to move */
+            animation: gradientShift 15s ease infinite alternate; /* Slow, gentle animation */
+            
+            color: #4B371C; 
+            scroll-behavior: smooth;
+        }
+        
+        /* Navigation Bar */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: #000000;
+            padding: 15px 15%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        nav a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #B8860B; /* Muted Gold/Bronze on hover */
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            display: block;
+            margin-top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #B8860B;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Header / Hero Section */
+        @keyframes headerFadeIn {
+            from {opacity: 0; transform: translateY(10px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        header {
+            text-align: center;
+            padding: 150px 20px 120px;
+            /* Header background now a subtle static gradient */
+            background: linear-gradient(to bottom, #EAE7E2, #FAF9F6); 
+            animation: headerFadeIn 1.5s ease-out; /* Keeping a distinct fade-in */
+        }
+
+        header h1 {
+            font-size: 4rem;
+            color: #4B371C; /* Dark Brown */
+            font-weight: 700;
+        }
+
+        header h2 {
+            font-size: 1.8rem;
+            color: #B8860B; /* Muted Gold */
+            margin-top: 15px;
+            text-shadow: 0 0 5px rgba(184, 134, 11, 0.2);
+        }
+
+        /* Section Visibility (Scroll Reveal JS) */
+        section {
+            padding: 80px 15%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+            border-bottom: 1px solid rgba(75, 55, 28, 0.1); /* Subtle divider */
+            background: transparent; /* Ensure section background doesn't hide body animation */
+        }
+        
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Section Titles */
+        h2.section-title {
+            color: #B8860B; /* Muted Gold Title */
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+            border-left: 6px solid #4B371C; /* Dark Brown Border */
+            padding-left: 15px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* Text & Content */
+        .about p, .goals p, .timeline-content p {
+            color: #4B371C; 
+            line-height: 1.8;
+        }
+
+        /* Skills Section */
+        .skills-logos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .skills-logos img {
+            width: 80px;
+            height: 80px;
+            transition: transform 0.4s ease, filter 0.4s ease;
+            cursor: pointer;
+            filter: grayscale(10%); /* Subtle desaturation */
+        }
+
+        .skills-logos img:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 10px #B8860B) grayscale(0%);
+        }
+
+        /* Projects Section */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: #EAE7E2; /* Slightly darker cream for card background */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.4s, box-shadow 0.4s;
+            border: 1px solid rgba(75, 55, 28, 0.2);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.2);
+            border-color: #B8860B;
+        }
+        
+        .project-card h3 {
+            color: #4B371C;
+            margin-bottom: 10px;
+            font-size: 1.6rem;
+        }
+        
+        .project-card p {
+            color: #4B371C;
+        }
+
+        /* Experience/Education Section Styling */
+        .timeline-item {
+            display: flex;
+            margin-bottom: 30px;
+            padding-left: 20px;
+            border-left: 2px solid #4B371C;
+        }
+        
+        .timeline-content {
+            padding: 0 20px;
+        }
+
+        .timeline-content h3 {
+            color: #B8860B;
+            font-size: 1.4rem;
+        }
+        
+        .timeline-content h4 {
+            color: #4B371C;
+            font-size: 1.1rem;
+            margin-top: 5px;
+        }
+        
+        .timeline-content p {
+            color: #6d5b4a; /* Slightly lighter brown for details */
+            font-size: 0.95rem;
+            margin-top: 5px;
+        }
+
+
+        /* Goals Section */
+        .goals strong {
+            color: #B8860B;
+            font-weight: 700;
+        }
+
+        /* Contact Section */
+        .contact-form {
+            max-width: 600px;
+            margin: auto;
+            background: #EAE7E2;
+            padding: 35px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(75, 55, 28, 0.3);
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            margin: 15px 0;
+            padding: 15px;
+            border: 1px solid #B8860B;
+            border-radius: 5px;
+            background: #FAF9F6;
+            color: #4B371C;
+            outline: none;
+            transition: border-color 0.3s;
+            font-size: 1rem;
+        }
+        
+        .contact-form input:focus, .contact-form textarea:focus {
+             border-color: #4B371C;
+             box-shadow: 0 0 5px rgba(75, 55, 28, 0.5);
+        }
+        
+        .contact-form input::placeholder, .contact-form textarea::placeholder {
+            color: #888888;
+        }
+
+        .contact-form button {
+            background: #4B371C; /* Dark Brown button */
+            color: #FFFFFF;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s ease, transform 0.1s;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: block;
+            width: 100%;
+        }
+
+        .contact-form button:hover {
+            background: #B8860B;
+            color: #4B371C;
+            box-shadow: 0 0 10px rgba(184, 134, 11, 0.5);
+        }
+        
+        .contact-form button:active {
+            transform: scale(0.98);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 50px;
+            background: #000000;
+            border-top: 2px solid #B8860B;
+        }
+
+        .social-links a {
+            margin: 0 15px;
+            color: #FFFFFF;
+            font-size: 1.8rem;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #B8860B;
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        /* Copyright text */
+        footer p {
+            color: #cccccc !important;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            section {
+                padding: 60px 10%;
+            }
+            nav {
+                padding: 15px 5%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.8rem;
+            }
+            header h2 {
+                font-size: 1.4rem;
+            }
+            section {
+                padding: 40px 5%;
+            }
+            nav ul {
+                gap: 20px;
+            }
+            .timeline-item {
+                flex-direction: column;
+                padding-left: 0;
+                border-left: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="#about-section">About</a></li>
+            <li><a href="#skills-section">Skills</a></li>
+            <li><a href="#projects-section">Projects</a></li>
+            <li><a href="#experience-section">Experience</a></li>
+            <li><a href="#education-section">Education</a></li>
+            <li><a href="#contact-section">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Hey, I'm Muhammad Jawad MR</h1>
+        <h2>Passionate Coder | Tech Enthusiast | Founder of Jsn creative</h2>
+    </header>
+
+    <section class="about" id="about-section">
+        <h2 class="section-title">About Me</h2>
+        <p>
+            I'm a BTech Computer Science student with an addon in Data Science & AI/ML at Yenepoya University under the Kalvium syllabus.
+            I love building meaningful tech, creating videos, and shaping my visualization into something legendary.
+            A coder by day, dreamer by night — constantly learning and building the future. My focus is on creating responsive, performant web applications and exploring the intersection of AI, creative media, and business strategy.
+        </p>
+    </section>
+
+    <section class="skills" id="skills-section">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-logos">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/blender/blender-original.svg" alt="Blender">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/premierepro/premierepro-original.svg" alt="DaVinci Resolve" title="Video Editing (DaVinci/Premiere)">
+        </div>
+    </section>
+
+    <section class="projects" id="projects-section">
+      <h2 class="section-title">Projects</h2>
+      <div class="projects">
+    
+      <div class="project-card">
+      <h3>QuickShare</h3>
+      <p>
+        A fast and seamless file-sharing software that enables users to transfer data instantly 
+        between nearby devices without internet dependency — built for speed, privacy, and simplicity.
+      </p>
+      </div>
+
+      <div class="project-card">
+      <h3>EasyAdmission</h3>
+      <p>
+        A student-friendly app designed to simplify the college admission process — 
+        helps students explore colleges, compare programs, and apply with ease through an intuitive interface.
+      </p>
+      </div>
+
+      <div class="project-card">
+        <h3>StayFinder</h3>
+        <p>
+          A location-based application that helps students and professionals discover 
+          PGs, hostels, and rental rooms nearby — with filters for budget, distance, and amenities.
+        </p>
+      </div>
+
+    <div class="project-card">
+      <h3>WorkConnect</h3>
+      <p>
+        A community-driven platform connecting students and freelancers with part-time opportunities 
+        such as event help, catering, and short-term jobs — making local gig work easier and accessible.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+    
+<section class="experience" id="experience-section">
+  <h2 class="section-title">Experience</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <h3>Founder & Creative Director</h3>
+        <h4>JSN CREATIVE | 2023 – Present</h4>
+        <p>
+          Founded and lead <strong>Jsn creative</strong>, a media and technology venture combining 
+          <strong>AI-driven content creation, app development,</strong> and <strong>digital storytelling.</strong>  
+          Oversee brand strategy, video production, and product design — driving innovation through 
+          platforms like <em>Scholars Guide</em> and <em>AI About Success</em>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+    
+    <section class="education" id="education-section">
+        <h2 class="section-title">Education</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>BTech Computer Science (Data Science & AI/ML)</h3>
+                    <h4>Yenepoya University (Kalvium Syllabus) | 2024 - 2028 </h4>
+                    <p>Focused coursework in deep learning, machine vision, and advanced data structures. </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="goals" id="goals-section">
+        <h2 class="section-title">Goals</h2>
+        <p>
+            My mission is to build <strong>JSN CREATIVE</strong> into a top-tier tech company — combining creativity, AI, and innovation into one legendary brand that shapes the future of technology and media. I aim to secure a role as a Full-Stack Developer to gain practical experience while driving my entrepreneurial vision.
+        </p>
+    </section>
+
+<section class="contact" id="contact-section">
+  <h2 class="section-title">Contact Me</h2>
+  <form class="contact-form" action="https://formspree.io/f/meopdvbo" method="POST">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<script>
+  const form = document.querySelector(".contact-form");
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const response = await fetch(form.action, {
+      method: "POST",
+      body: new FormData(form),
+      headers: { Accept: "application/json" },
+    });
+    if (response.ok) {
+  alert("✉️ *Your message has been sent successfully.*");
+  form.reset();
+} else {
+  alert("⚠️ *Something went wrong. Please try again.*");
+}
+
+  });
+</script>
+
+
+    <footer>
+        <div class="social-links">
+            <a href="https://www.instagram.com/jawad____mr/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://x.com/jawad____mr_" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://github.com/Jawad-mr" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/jawad-mr" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <p style="margin-top:15px; color:#cccccc;">© 2025 Muhammad Jawad MR. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15 // Trigger when 15% of the section is visible
+        });
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+
+</body>
+</html>
