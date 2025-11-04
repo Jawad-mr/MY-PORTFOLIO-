@@ -9,10 +9,6 @@
     <style>
         /*
         Color Palette: Classic Black, Cream, and Dark Brown
-        Body Background: #FAF9F6 (Cream) with subtle animation
-        General Text: #4B371C (Dark Brown)
-        Navbar/Footer Background: #000000 (Black)
-        Accent: #B8860B (Muted Gold/Bronze)
         */
         * {
             margin: 0;
@@ -31,14 +27,15 @@
         body {
             /* Animated gradient for a subtle "skin-colored" feel */
             background: linear-gradient(135deg, #FAF9F6, #F0EDE5, #FAF9F6);
-            background-size: 200% 200%; /* Important for the animation to have space to move */
-            animation: gradientShift 15s ease infinite alternate; /* Slow, gentle animation */
+            background-size: 200% 200%; 
+            animation: gradientShift 15s ease infinite alternate; 
             
             color: #4B371C; 
             scroll-behavior: smooth;
+            padding-bottom: 0; /* No bottom padding needed on desktop */
         }
         
-        /* Navigation Bar */
+        /* Navigation Bar - Default (Desktop/Laptop: Sticky Top Bar) */
         nav {
             position: sticky;
             top: 0;
@@ -46,12 +43,14 @@
             background: #000000;
             padding: 15px 15%;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center; 
+            align-items: center;
         }
 
         nav ul {
             list-style: none;
             display: flex;
-            justify-content: center;
             gap: 40px;
         }
 
@@ -61,7 +60,18 @@
             font-weight: 600;
             transition: color 0.3s;
             position: relative;
+            padding: 10px 0;
+            display: block;
         }
+        
+        /* Desktop: Show text, HIDE icons */
+        nav a span {
+            display: inline;
+        }
+        nav a i {
+            display: none;
+        }
+
 
         nav a:hover {
             color: #B8860B; /* Muted Gold/Bronze on hover */
@@ -93,32 +103,31 @@
         header {
             text-align: center;
             padding: 150px 20px 120px;
-            /* Header background now a subtle static gradient */
             background: linear-gradient(to bottom, #EAE7E2, #FAF9F6); 
-            animation: headerFadeIn 1.5s ease-out; /* Keeping a distinct fade-in */
+            animation: headerFadeIn 1.5s ease-out;
         }
 
         header h1 {
             font-size: 4rem;
-            color: #4B371C; /* Dark Brown */
+            color: #4B371C;
             font-weight: 700;
         }
 
         header h2 {
             font-size: 1.8rem;
-            color: #B8860B; /* Muted Gold */
+            color: #B8860B;
             margin-top: 15px;
             text-shadow: 0 0 5px rgba(184, 134, 11, 0.2);
         }
 
-        /* Section Visibility (Scroll Reveal JS) */
+        /* Section Styling - Default (Desktop/Laptop) */
         section {
             padding: 80px 15%;
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 1s ease-out, transform 1s ease-out;
-            border-bottom: 1px solid rgba(75, 55, 28, 0.1); /* Subtle divider */
-            background: transparent; /* Ensure section background doesn't hide body animation */
+            border-bottom: 1px solid rgba(75, 55, 28, 0.1); 
+            background: transparent; 
         }
         
         .visible {
@@ -126,18 +135,16 @@
             transform: translateY(0);
         }
 
-        /* Section Titles */
         h2.section-title {
-            color: #B8860B; /* Muted Gold Title */
+            color: #B8860B;
             font-size: 2.8rem;
             margin-bottom: 30px;
-            border-left: 6px solid #4B371C; /* Dark Brown Border */
+            border-left: 6px solid #4B371C;
             padding-left: 15px;
             font-weight: 700;
             letter-spacing: 1px;
         }
 
-        /* Text & Content */
         .about p, .goals p, .timeline-content p {
             color: #4B371C; 
             line-height: 1.8;
@@ -156,7 +163,7 @@
             height: 80px;
             transition: transform 0.4s ease, filter 0.4s ease;
             cursor: pointer;
-            filter: grayscale(10%); /* Subtle desaturation */
+            filter: grayscale(10%);
         }
 
         .skills-logos img:hover {
@@ -172,7 +179,7 @@
         }
 
         .project-card {
-            background: #EAE7E2; /* Slightly darker cream for card background */
+            background: #EAE7E2;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.1);
@@ -196,7 +203,7 @@
             color: #4B371C;
         }
 
-        /* Experience/Education Section Styling */
+        /* Experience/Education Timeline - Default (Desktop/Laptop) */
         .timeline-item {
             display: flex;
             margin-bottom: 30px;
@@ -220,16 +227,9 @@
         }
         
         .timeline-content p {
-            color: #6d5b4a; /* Slightly lighter brown for details */
+            color: #6d5b4a;
             font-size: 0.95rem;
             margin-top: 5px;
-        }
-
-
-        /* Goals Section */
-        .goals strong {
-            color: #B8860B;
-            font-weight: 700;
         }
 
         /* Contact Section */
@@ -256,17 +256,8 @@
             font-size: 1rem;
         }
         
-        .contact-form input:focus, .contact-form textarea:focus {
-             border-color: #4B371C;
-             box-shadow: 0 0 5px rgba(75, 55, 28, 0.5);
-        }
-        
-        .contact-form input::placeholder, .contact-form textarea::placeholder {
-            color: #888888;
-        }
-
         .contact-form button {
-            background: #4B371C; /* Dark Brown button */
+            background: #4B371C;
             color: #FFFFFF;
             border: none;
             padding: 15px 25px;
@@ -282,13 +273,8 @@
         .contact-form button:hover {
             background: #B8860B;
             color: #4B371C;
-            box-shadow: 0 0 10px rgba(184, 134, 11, 0.5);
         }
         
-        .contact-form button:active {
-            transform: scale(0.98);
-        }
-
         /* Footer */
         footer {
             text-align: center;
@@ -309,56 +295,206 @@
             transform: translateY(-5px) scale(1.1);
         }
 
-        /* Copyright text */
         footer p {
             color: #cccccc !important;
         }
 
-     /* Responsive adjustments */
+     /* --- RESPONSIVENESS --- */
 
- /* Responsive adjustments */
-        @media (max-width: 1024px) {
-            section {
-                padding: 60px 10%;
-            }
-            nav {
-                padding: 15px 5%;
-            }
-        }
-
-        @media (max-width: 1024px) {
-            header h1 {
-                font-size: 2.8rem;
-            }
-            header h2 {
-                font-size: 1.4rem;
-            }
-            section {
-                padding: 40px 5%;
-            }
-            nav ul {
-                gap: 20px;
-            }
-            .timeline-item {
-                flex-direction: column;
-                padding-left: 0;
-                border-left: none;
-            }
-        }
+/* Tablets and small laptops (Max width 1024px) */
+@media (max-width: 1024px) {
+    section {
+        padding: 60px 8%;
+    }
+    nav {
+        padding: 15px 5%;
+    }
+    header h1 {
+        font-size: 3rem;
+    }
+    header h2 {
+        font-size: 1.5rem;
+    }
+    h2.section-title {
+        font-size: 2.2rem;
+    }
+    .projects {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
 
 
+/* Mobile devices (Max width 768px) - Fixed Bottom Navigation */
+@media (max-width: 768px) {
+    
+    /* Add padding to the bottom of the body so content doesn't get hidden under the fixed navbar */
+    body {
+        padding-bottom: 70px; 
+    }
+    
+    /* Fixed Bottom Navigation Bar */
+    nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 0; /* Remove padding to maximize space for icons */
+        height: 60px; /* Fixed height for the bar */
+        justify-content: center;
+        background: #000000; 
+        z-index: 1100;
+        box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.4);
+    }
+    
+    nav ul {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-around; /* Space icons evenly */
+        align-items: center;
+        gap: 0;
+    }
+
+    nav ul li {
+        flex-grow: 1; /* Make each link take equal horizontal space */
+        text-align: center;
+    }
+
+    /* Mobile: Show icons, hide text */
+    nav a {
+        padding: 0; /* Minimal padding */
+        line-height: 1;
+        display: flex;
+        /* Center the icon perfectly */
+        align-items: center; 
+        justify-content: center; 
+        height: 60px;
+    }
+    nav a span {
+        display: none; /* Hide the text label */
+    }
+    nav a i {
+        display: block; /* Show the icon */
+        font-size: 1.5rem; /* Larger icon size */
+        margin: 0; /* Ensure no extra margin */
+    }
+    
+    /* Remove the hover underline animation on mobile links */
+    nav a::after {
+        display: none;
+    }
+
+    /* Header Text Scaling */
+    header {
+        padding: 100px 20px 80px;
+    }
+    header h1 {
+        font-size: 2.2rem;
+    }
+    header h2 {
+        font-size: 1.2rem;
+    }
+
+    /* Section Padding */
+    section {
+        padding: 40px 6%;
+    }
+    h2.section-title {
+        font-size: 1.8rem;
+    }
+
+    /* Projects Section - Single Column */
+    .projects {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    /* Skills Section - Adjust minmax for more columns */
+    .skills-logos {
+        grid-template-columns: repeat(auto-fit, minmax(65px, 1fr));
+        gap: 15px;
+    }
+    .skills-logos img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    /* Timeline (Experience/Education) - Vertical/Stacked Layout */
+    .timeline-item {
+        flex-direction: column;
+        padding-left: 0;
+        border-left: none;
+        margin-bottom: 30px;
+        border-bottom: 1px solid rgba(75, 55, 28, 0.1);
+        padding-bottom: 20px;
+    }
+    
+    .timeline-item::before {
+        content: "•";
+        color: #B8860B; 
+        font-size: 2rem;
+        display: block;
+        margin-bottom: 5px;
+        line-height: 0.8;
+    }
+
+    .timeline-content {
+        padding: 0;
+    }
+    
+    /* Contact Form Scaling */
+    .contact-form {
+        padding: 25px;
+    }
+    
+    /* Footer Social Icons */
+    .social-links a {
+        font-size: 1.5rem;
+        margin: 0 10px;
+    }
+    
+    /* Ensure footer is pushed up by the body padding, not obscured */
+    footer {
+        padding-bottom: 70px; /* Adjust footer padding to account for the fixed nav bar */
+    }
+}
+
+/* Extra small screens (Phones under 480px) */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+    header h2 {
+        font-size: 1rem;
+    }
+    section {
+        padding: 30px 4%;
+    }
+    h2.section-title {
+        font-size: 1.5rem;
+        padding-left: 10px;
+        border-left: 4px solid #4B371C;
+    }
+    .skills-logos {
+        grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    }
+    .skills-logos img {
+        width: 50px;
+        height: 50px;
+    }
+}
     </style>
 </head>
 <body>
 
     <nav>
         <ul>
-            <li><a href="#about-section">About</a></li>
-            <li><a href="#skills-section">Skills</a></li>
-            <li><a href="#projects-section">Projects</a></li>
-            <li><a href="#experience-section">Experience</a></li>
-            <li><a href="#education-section">Education</a></li>
-            <li><a href="#contact-section">Contact</a></li>
+            <li><a href="#about-section"><i class="fas fa-user"></i><span>About</span></a></li>
+            <li><a href="#skills-section"><i class="fas fa-code"></i><span>Skills</span></a></li>
+            <li><a href="#projects-section"><i class="fas fa-folder-open"></i><span>Projects</span></a></li>
+            <li><a href="#experience-section"><i class="fas fa-briefcase"></i><span>Experience</span></a></li>
+            <li><a href="#education-section"><i class="fas fa-graduation-cap"></i><span>Education</span></a></li>
+            <li><a href="#contact-section"><i class="fas fa-envelope"></i><span>Contact</span></a></li>
         </ul>
     </nav>
 
@@ -482,6 +618,7 @@
 </section>
 
 <script>
+  // Contact Form Submission Handling
   const form = document.querySelector(".contact-form");
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -498,6 +635,23 @@
 }
 
   });
+  
+
+  // Scroll Reveal Logic
+  const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+          if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+          }
+      });
+  }, {
+      threshold: 0.15 // Trigger when 15% of the section is visible
+  });
+
+  document.querySelectorAll('section').forEach(section => {
+      observer.observe(section);
+  });
 </script>
 
 
@@ -510,23 +664,6 @@
         </div>
         <p style="margin-top:15px; color:#cccccc;">© 2025 Muhammad Jawad MR. All rights reserved.</p>
     </footer>
-
-    <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.15 // Trigger when 15% of the section is visible
-        });
-
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
-    </script>
 
 </body>
 </html>
